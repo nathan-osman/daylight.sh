@@ -1,4 +1,5 @@
 from datetime import datetime
+from os import path
 
 from geoip2.database import Reader
 from flask import Flask, jsonify, render_template, request
@@ -16,7 +17,9 @@ _MIME_JSON = 'application/json'
 app = Flask(__name__)
 
 # Load the MaxMind database
-reader = Reader('GeoLite2-City.mmdb')
+reader = Reader(
+    path.join(path.dirname(path.abspath(__file__)), 'GeoLite2-City.mmdb')
+)
 
 
 def _geolocate(ip):
