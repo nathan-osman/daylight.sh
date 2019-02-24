@@ -7,4 +7,4 @@ RUN pip install -r /app/requirements.txt
 # Download MaxMind's database
 RUN \
     curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | \
-        tar xf GeoLite2-Country.tar.gz --strip-components -C /app
+        tar xf GeoLite2-Country.tar.gz --strip-components 1 -C /app
