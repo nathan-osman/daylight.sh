@@ -1,0 +1,145 @@
+/* The MIT License (MIT)
+ *
+ * Copyright (c) 2018 Nathan Osman
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1d1d1d;
+}
+
+body,
+button,
+input {
+  color: #d7d7d7;
+  font-family: "Roboto Condensed";
+  font-size: 14pt;
+  font-weight: 300;
+}
+
+button,
+input {
+  border-radius: 3px;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+button:focus,
+input:focus{
+  border-color: #f77;
+  outline: none;
+}
+
+button {
+  background-color: #3f3f3f;
+  border: 1px solid #3f3f3f;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d1d1d;
+}
+
+form {
+  background-color: #272727;
+  border-radius: 6px;
+  padding: 24px;
+}
+
+form .field {
+  margin: 0 0 32px;
+}
+
+form .field .label {
+  margin: 0 0 8px;
+}
+
+input {
+  background-color: #1d1d1d;
+  border: 1px solid transparent;
+  display: block;
+}
+
+/* Grid classes */
+
+.container {
+  margin: auto;
+  max-width: 640px;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  margin: 0 -16px;
+}
+
+.row .column {
+  flex-grow: 1;
+  margin: 0 16px;
+}
+
+/* Header classes */
+
+.header {
+  margin: 40px 0 60px;
+  text-align: center;
+}
+
+.header h1 {
+  color: #f77;
+  font-size: 48pt;
+  font-weight: 300;
+  margin: 0;
+}
+
+.header p {
+  margin: 0;
+}
+
+/* Spinner */
+
+.spinner {
+  display: none;
+  margin-top: 48px;
+  text-align: center;
+}
+
+/* Result */
+
+.result {
+  display: none;
+  margin-top: 24px;
+}
+
+.result h2 {
+  font-size: 36pt;
+  font-weight: 300;
+  text-align: center;
+}
+
+.result h2 .label {
+  color: #f77;
+  display: block;
+  font-size: 18pt;
+}

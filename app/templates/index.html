@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daylight Calculator</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/daylight.css') }}">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <!-- Header -->
+      <div class="header">
+        <h1>Daylight Calculator</h1>
+        <p>
+          Use the tool below to calculate the sunrise and sunset times for a given location.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form method="post">
+
+        <!-- Timezone -->
+        <input type="hidden" name="timezone" value="{{ timezone }}">
+
+        <!-- Location -->
+        <div class="row">
+          <div class="column">
+            <div class="field">
+              <div class="label">Latitude</div>
+              <input type="number" name="latitude" value="{{ latitude }}">
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <div class="label">Longitude</div>
+              <input type="number" name="longitude" value="{{ longitude }}">
+            </div>
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="row">
+          <div class="column">
+            <div class="field">
+              <div class="label">Year</div>
+              <input type="number" name="year" value="{{ year }}">
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <div class="label">Month</div>
+              <input type="number" name="month" value="{{ month }}">
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <div class="label">Day</div>
+              <input type="number" name="day" value="{{ day }}">
+            </div>
+          </div>
+        </div>
+
+        <!-- Button for calculating results -->
+        <button type="submit" id="calculate">
+          Calculate
+        </button>
+
+      </form>
+
+      <!-- Spinner -->
+      <div class="spinner" id="spinner">
+        <img src="{{ url_for('static', filename='img/spinner.svg') }}"><br>
+        Calculating...
+      </div>
+
+      <!-- Result -->
+      <div class="result" id="result">
+        <div class="row">
+          <div class="column">
+            <h2 id="sunrise">
+              <span class="value"></span>
+              <span class="label">sunrise</span>
+            </h2>
+          </div>
+          <div class="column">
+            <h2 id="sunset">
+              <span class="value"></span>
+              <span class="label">sunset</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      var autoLocation = {% if auto_location %}true{% else %}false{% endif %},
+          autoDate = {% if auto_date %}true{% else %}false{% endif %};
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/daylight.js') }}"></script>
+  </body>
+</html>

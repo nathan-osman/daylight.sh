@@ -1,0 +1,7 @@
+{% if location %}Location: {{ location }}
+{% else %}Location: [unknown]
+{% endif %}{% if sunrise and sunset %}Sunrise: {{ sunrise_datetime }}
+Sunset: {{ sunset_datetime }}
+{% else %}Sunrise: [unknown]
+Sunset: [unknown]
+{% endif %}
