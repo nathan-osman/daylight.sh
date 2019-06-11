@@ -33,7 +33,6 @@ def _geolocate(ip):
     the response is an empty map
     """
     try:
-        app.logger.info("geolocating {}...".format(ip), file=stderr)
         d = reader.city(ip)
         l = []
         if d.city.name is not None:
@@ -45,7 +44,7 @@ def _geolocate(ip):
             'latitude': d.location.latitude,
             'longitude': d.location.longitude,
             'location': ', '.join(l),
-            'timezone': d.location.timezone,
+            'timezone': d.location.time_zone,
         }
     except:
         return {}
