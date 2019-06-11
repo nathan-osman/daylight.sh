@@ -77,9 +77,10 @@ def _get_data(request):
     # If a date was not provided, use the current one (using the timezone from
     # geolocation, UTC for fallback)
     if 'year' not in data or 'month' not in data or 'day' not in data:
-        t = utc
-        if 'timezone' in g:
-            t = timezone(data['timezone'])
+        try:
+            t = timezone(data.get('timezone', g['timezone']))
+        except:
+            t = utc
         n = datetime.now(t)
         data.update({
             'year': n.year,
