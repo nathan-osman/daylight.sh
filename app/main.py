@@ -33,6 +33,7 @@ def _geolocate(ip):
     the response is an empty map
     """
     try:
+        print("geolocating {}...".format(ip))
         d = reader.city(ip)
         l = []
         if d.city.name is not None:
