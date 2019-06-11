@@ -1,5 +1,6 @@
 from datetime import datetime
 from os import path
+from sys import stderr
 
 from geoip2.database import Reader
 from flask import Flask, jsonify, render_template, request
@@ -33,7 +34,7 @@ def _geolocate(ip):
     the response is an empty map
     """
     try:
-        print("geolocating {}...".format(ip))
+        print("geolocating {}...".format(ip), file=stderr)
         d = reader.city(ip)
         l = []
         if d.city.name is not None:
