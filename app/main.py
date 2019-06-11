@@ -3,7 +3,8 @@ from os import path
 
 from geoip2.database import Reader
 from flask import Flask, jsonify, render_template, request
-from pytz import timezone, utc
+from flask.json import JSONEncoder
+from pytz import timezone, tzfile, utc
 from werkzeug.contrib.fixers import ProxyFix
 
 from sunrise import sunrise_sunset
@@ -15,12 +16,27 @@ _MIME_FORM = 'application/x-www-form-urlencoded'
 _MIME_JSON = 'application/json'
 
 
+class CustomJSONEncoder(JSONEncoder):
+    """
+    Encode TZ values by their name.
+    """
+
+    def default(self, obj):
+        if isinstance(obj, tzfile.DstTzInfo):
+            return obj.zone
+        else:
+            return JSONEncoder.default(self, obj)
+
+
 app = Flask(__name__)
+app.json_encoder = CustomJSONEncoder
 app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
 
 # Load the MaxMind database
 reader = Reader(
     path.join(path.dirname(path.abspath(__file__)), 'GeoLite2-City.mmdb')
+
+
 )
 
 
