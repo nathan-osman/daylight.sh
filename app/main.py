@@ -4,6 +4,7 @@ from os import path
 from geoip2.database import Reader
 from flask import Flask, jsonify, render_template, request
 from pytz import timezone, utc
+from werkzeug.contrib.fixers import ProxyFix
 
 from sunrise import sunrise_sunset
 
@@ -15,6 +16,7 @@ _MIME_JSON = 'application/json'
 
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
 
 # Load the MaxMind database
 reader = Reader(
@@ -65,7 +67,7 @@ def _get_data(request):
     data.update(request.args)
 
     # Geolocate the client in order to determine timezone information
-    g = _geolocate(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))
+    g = _geolocate(request.remote_addr)
 
     # If the client did not provide coordinates, use the geo ones
     if 'latitude' not in data or 'longitude' not in data:
