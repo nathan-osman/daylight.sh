@@ -76,6 +76,7 @@ $(function() {
     .always(function() {
       $spinner.hide();
     });
+    return false;
   }
 
   // Initialize the location fields if available
