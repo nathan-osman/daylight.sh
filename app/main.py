@@ -85,7 +85,7 @@ def _get_data(request):
             'year': n.year,
             'month': n.month,
             'day': n.day,
-            'timezone': t.zone,
+            'timezone': t,
             'auto_date': True,
         })
 
