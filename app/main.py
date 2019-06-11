@@ -74,19 +74,20 @@ def _get_data(request):
         data.update(g)
         data['auto_location'] = True
 
-    # If a date was not provided, use the current one (using the timezone from
-    # geolocation, UTC for fallback)
+    # Attempt to determine an appropriate timezone to use
+    try:
+        tz = timezone(data.get('timezone', g['timezone']))
+    except:
+        tz = utc
+    data['tz'] = tz
+
+    # If a date was not provided, use the current one
     if 'year' not in data or 'month' not in data or 'day' not in data:
-        try:
-            t = timezone(data.get('timezone', g['timezone']))
-        except:
-            t = utc
-        n = datetime.now(t)
+        n = datetime.now(tz)
         data.update({
             'year': n.year,
             'month': n.month,
             'day': n.day,
-            'timezone': t,
             'auto_date': True,
         })
 
