@@ -87,13 +87,13 @@
         <div class="row">
           <div class="column">
             <h2 id="sunrise">
-              <span class="value"></span>
+              <span class="value">{% if sunrise %}{{ timestamp_to_pretty(sunrise, timezone) }}{% endif %}</span>
               <span class="label">sunrise</span>
             </h2>
           </div>
           <div class="column">
             <h2 id="sunset">
-              <span class="value"></span>
+              <span class="value">{% if sunset %}{{ timestamp_to_pretty(sunset, timezone) }}{% endif %}</span>
               <span class="label">sunset</span>
             </h2>
           </div>
@@ -104,8 +104,7 @@
 
     <!-- Scripts -->
     <script>
-      var autoLocation = {% if auto_location %}true{% else %}false{% endif %},
-          autoDate = {% if auto_date %}true{% else %}false{% endif %};
+      var isPost = {{ is_post|tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>

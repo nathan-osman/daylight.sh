@@ -40,7 +40,7 @@ $(function() {
 
   // Initialize the date fields with the current date
   // (prefer the browser's values over the auto ones)
-  if (autoDate) {
+  if (!isPost) {
     var d = new Date();
     $timezone.val(moment.tz.guess().name);
     $year.val(d.getYear() + 1900);
@@ -68,20 +68,19 @@ $(function() {
         timezone: moment.tz.guess()
       })
     })
-    .done(function(d) {
+    .done(function (d) {
       $('#sunrise .value').text(moment.unix(d.sunrise).format(TIME_FMT));
       $('#sunset .value').text(moment.unix(d.sunset).format(TIME_FMT));
       $result.show();
     })
-    .always(function() {
+    .always(function () {
       $spinner.hide();
     });
-    return false;
   }
 
   // Initialize the location fields if available
   // (prefer the browser's values over the auto ones)
-  if (autoLocation && navigator.geolocation) {
+  if (!isPost && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(pos) {
       $latitude.val(pos.coords.latitude);
       $longitude.val(pos.coords.longitude);
