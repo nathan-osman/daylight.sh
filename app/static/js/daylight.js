@@ -30,6 +30,7 @@ $(function() {
   var $timezone = $('input[name=timezone]');
   var $latitude = $('input[name=latitude]');
   var $longitude = $('input[name=longitude]');
+  var $timezone = $('input[name=timezone]');
   var $year = $('input[name=year]');
   var $month = $('input[name=month]');
   var $day = $('input[name=day]');
@@ -49,10 +50,7 @@ $(function() {
   }
 
   // Perform the calculation and update the result display
-  function calculate(e) {
-    if (typeof e !== 'undefined') {
-      e.preventDefault();
-    }
+  function calculate() {
     $spinner.show();
     $result.hide();
     $.ajax({
@@ -65,7 +63,7 @@ $(function() {
         year: parseFloat($year.val()),
         month: parseFloat($month.val()),
         day: parseFloat($day.val()),
-        timezone: moment.tz.guess()
+        timezone: $timezone.val()
       })
     })
     .done(function (d) {
@@ -84,11 +82,15 @@ $(function() {
     navigator.geolocation.getCurrentPosition(function(pos) {
       $latitude.val(pos.coords.latitude);
       $longitude.val(pos.coords.longitude);
+      $timezone.val(moment.tz.guess());
       calculate();
     });
   }
 
-  // Set the event handler for the button
-  $('#calculate').submit(calculate);
+  // Set the event handler for the form
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    calculate();
+  });
 
 });

@@ -1,7 +1,7 @@
 {% if location %}Location: {{ location }}
 {% else %}Location: [unknown]
-{% endif %}{% if sunrise and sunset %}Sunrise: {{ timestamp_to_pretty(sunrise, timezone) }}
-Sunset: {{ timestamp_to_pretty(sunset, timezone) }}
+{% endif %}{% if sunrise and sunset %}Sunrise: {{ timestamp_to_pretty(sunrise, tz) }}
+Sunset: {{ timestamp_to_pretty(sunset, tz) }}
 {% else %}Sunrise: [unknown]
 Sunset: [unknown]
 {% endif %}

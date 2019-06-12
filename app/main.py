@@ -15,9 +15,9 @@ app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
 
 @app.context_processor
 def inject_functions():
-    def timestamp_to_pretty(timestamp, timezone):
+    def timestamp_to_pretty(timestamp, tz):
         d = datetime.utcfromtimestamp(timestamp).replace(
-            tzinfo=utc).astimezone(timezone)
+            tzinfo=utc).astimezone(tz)
         return '{}:{:02}{}'.format(
             d.hour % 12 or '12',
             d.minute,
@@ -47,16 +47,19 @@ def index():
     if None not in data.values():
         data['sunrise'], data['sunset'] = sunrise_sunset(**data)
 
-    # Inject the location if available
+    # Inject the location and timezone if available
     location = input.get('location')
     if location is not None:
         data['location'] = location
+    timezone = input.get('timezone')
+    if timezone is not None:
+        data['timezone'] = timezone
 
     # Add a few extra variables for the template renderers
     extra = dict(data)
     extra.update({
         'is_post': request.method == 'POST',
-        'timezone': input.get_timezone(),
+        'tz': input.get_timezone(),
     })
 
     # Write the response
